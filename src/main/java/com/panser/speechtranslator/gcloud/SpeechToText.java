@@ -1,3 +1,5 @@
+package com.panser.speechtranslator.gcloud;
+
 import com.google.cloud.speech.v1.RecognitionAudio;
 import com.google.cloud.speech.v1.RecognitionConfig;
 import com.google.cloud.speech.v1.RecognizeResponse;
@@ -8,7 +10,6 @@ import com.google.protobuf.ByteString;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,21 +19,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class GCloudRecognize {
-
-    public static final String FLAC_DIRECTORY = "d:\\Downloads\\TipToi\\tttool-1.9\\media\\flac";
-    public static final String OUTPUT_FILE_NAME = "transcripts.txt";
+public class SpeechToText {
 
     public static final String SPEECH_LANGUAGE_CODE = "de-DE";
     public static final int SPEECH_SAMPLE_RATE = 22050;
     public static final RecognitionConfig.AudioEncoding SPEECH_ENCODING = RecognitionConfig.AudioEncoding.FLAC;
-
-    public static void main(String[] args) throws Exception {
-        List<String> filePaths = listAllFilePaths(FLAC_DIRECTORY);
-        BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE_NAME));
-        filePaths.forEach(filePath -> GCloudRecognize.translateAndWriteToFile(writer, filePath));
-        writer.close();
-    }
 
     public static void translateAndWriteToFile(BufferedWriter writer, String filePath) {
         File file = null;
