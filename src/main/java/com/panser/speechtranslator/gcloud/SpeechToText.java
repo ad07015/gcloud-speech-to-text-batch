@@ -8,12 +8,12 @@ import com.google.cloud.speech.v1.SpeechRecognitionAlternative;
 import com.google.cloud.speech.v1.SpeechRecognitionResult;
 import com.google.protobuf.ByteString;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.AbstractMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,17 +25,18 @@ public class SpeechToText {
     public static final int SPEECH_SAMPLE_RATE = 22050;
     public static final RecognitionConfig.AudioEncoding SPEECH_ENCODING = RecognitionConfig.AudioEncoding.FLAC;
 
-    public static void translateAndWriteToFile(BufferedWriter writer, String filePath) {
+    public static AbstractMap.SimpleEntry<String, String> transcribeFile(String filePath) {
+        AbstractMap.SimpleEntry<String, String> result = null;
         File file = null;
         try {
             file = new File(filePath);
             String fileNameNoExtension = file.getName().split("\\.")[0];
             String transcript = syncRecognizeFile(filePath);
-            writer.write(fileNameNoExtension + ": " + transcript);
-            writer.newLine();
+            result = new AbstractMap.SimpleEntry<>(fileNameNoExtension, transcript);
         } catch (Exception e) {
             System.out.println("Failed to transcribe " + file.getName());
         }
+        return result;
     }
 
     /**
