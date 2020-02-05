@@ -13,9 +13,9 @@ public class Translator {
         return translate(List.of(stringToBeTranslated)).get(0);
     }
 
-    public static List<String> translate(List<String> stringToBeTranslated) {
+    public static List<String> translate(List<String> stringsToBeTranslated) {
         Translate translate = TranslateOptions.getDefaultInstance().getService();
-        List<Translation> translations = translate.translate(stringToBeTranslated, Translate.TranslateOption.targetLanguage("ru"));
+        List<Translation> translations = translate.translate(stringsToBeTranslated, Translate.TranslateOption.targetLanguage("ru"));
         return translations.stream().map(Translation::getTranslatedText).collect(Collectors.toList());
     }
 }
