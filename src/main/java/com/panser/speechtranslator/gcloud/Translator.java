@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 
 public class Translator {
 
-    private static String TRANSLATED_TRANSCRIPTS_FILE_PATH = "transcripts_translated.txt";
-
     public static String translate(String stringToBeTranslated) {
         return translate(List.of(stringToBeTranslated)).get(0);
     }
