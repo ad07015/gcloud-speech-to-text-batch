@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.AbstractMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,6 +30,7 @@ public class SpeechToText {
         AbstractMap.SimpleEntry<String, String> result = null;
         File file = null;
         try {
+            TimeUnit.MICROSECONDS.sleep(60);
             file = new File(filePath);
             String fileNameNoExtension = file.getName().split("\\.")[0];
             String transcript = syncRecognizeFile(filePath);

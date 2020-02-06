@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class TextToSpeech {
 
@@ -29,6 +30,7 @@ public class TextToSpeech {
     public static void textToSpeech(Map.Entry<String, String> entry) {
         // Instantiates a client
         try (TextToSpeechClient textToSpeechClient = TextToSpeechClient.create()) {
+            TimeUnit.MICROSECONDS.sleep(60);
             // Set the text input to be synthesized
             SynthesisInput input = SynthesisInput.newBuilder()
                     .setText(entry.getValue())
