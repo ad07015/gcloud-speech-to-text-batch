@@ -6,6 +6,7 @@ import com.google.cloud.translate.Translation;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -26,5 +27,10 @@ public class Translator {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static Map<String, String> translate(Map<String, String> map) {
+        return map.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> translate(entry.getValue())));
     }
 }

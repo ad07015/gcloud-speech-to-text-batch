@@ -11,7 +11,6 @@ import com.google.protobuf.ByteString;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -19,13 +18,6 @@ public class TextToSpeech {
 
     public static final String OUTPUT_FORMAT_EXTENSION = "ogg";
     public static final AudioEncoding OUTPUT_ENCODING = AudioEncoding.OGG_OPUS;
-
-    public static void main(String... args) throws Exception {
-        Map<String, String> filenameToTranslation = new LinkedHashMap<>();
-        filenameToTranslation.put("foo1", "Каждый ребенок с нетерпением ждет Дня Мартина, если вы хотите услышать историю об этом, тогда фрау Мелцер будет делать, как Макс и пес Бенни стоят перед овощной лавкой со мной");
-
-        filenameToTranslation.entrySet().forEach(TextToSpeech::textToSpeech);
-    }
 
     public static void textToSpeech(Map.Entry<String, String> entry) {
         // Instantiates a client
@@ -65,5 +57,9 @@ public class TextToSpeech {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void textToSpeech(Map<String, String> filenameToTranslation) {
+        filenameToTranslation.entrySet().forEach(TextToSpeech::textToSpeech);
     }
 }

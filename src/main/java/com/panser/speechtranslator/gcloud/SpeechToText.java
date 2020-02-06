@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.AbstractMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,7 +34,7 @@ public class SpeechToText {
             TimeUnit.MICROSECONDS.sleep(60);
             file = new File(filePath);
             String fileNameNoExtension = file.getName().split("\\.")[0];
-            String transcript = syncRecognizeFile(filePath);
+            String transcript = transcribe(filePath);
             result = new AbstractMap.SimpleEntry<>(fileNameNoExtension, transcript);
         } catch (Exception e) {
             System.out.println("Failed to transcribe " + file.getName());
@@ -46,7 +47,7 @@ public class SpeechToText {
      *
      * @param filePath the path to a PCM audio file to transcribe.
      */
-    public static String syncRecognizeFile(String filePath) throws Exception {
+    private static String transcribe(String filePath) throws Exception {
         try (SpeechClient speech = SpeechClient.create()) {
             Path path = Paths.get(filePath);
             byte[] data = Files.readAllBytes(path);
@@ -87,5 +88,10 @@ public class SpeechToText {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static Map<String, String> transcribe(List<String> filePaths) {
+        return filePaths.stream().map(SpeechToText::transcribeFile)
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }
