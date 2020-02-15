@@ -1,0 +1,18 @@
+c:\Users\panserbj0rn\Documents\Sound recordings\Greeting.m4a
+
+ffmpeg -i c:\Users\panserbj0rn\Downloads\Greeting.m4a -ar 22050 -ac 1 foo.ogg
+
+ffmpeg -i c:\Users\panserbj0rn\Downloads\Jahreszeiten_5.ogg -ar 22050 -ac 1 foo.flac
+
+
+gcloud ml speech recognize gs://d:\Downloads\TipToi\tttool-1.9\media\Jahreszeiten_6.ogg --language-code=de-DE
+gcloud ml speech recognize c:\Users\panserbj0rn\Downloads\foo.flac --language-code=de-DE
+C:\Users\panserbj0rn\Documents\Sound recordings
+
+for i in Jahreszeiten_*.ogg; do ffmpeg -i "$i" -ar 22050 -ac 1  "${i%.*}.flac"; done
+
+gcloud ml speech recognize c:\Users\apnserbj0rn\Downloads\foo.flac --language-code=de-DE
+
+ffmpeg -i Jahreszeiten_100.ogg -ar 22050 -ac 1 ogg\Jahreszeiten_100.ogg
+
+for i in Jahreszeiten_*.ogg; do ffmpeg -i "$i" -ar 22050 -ac 1  "ogg/${i%.*}.ogg"; done
